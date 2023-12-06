@@ -19,11 +19,49 @@ p {
   margin: 0 auto;
   margin-top: 50px;
 }
+a {
+  color: #991F36;
+  text-decoration: none;
+  border-bottom: 1px solid #991F36;
+}
+a:hover {
+  background-color: #F1F0EF;
+  color: #18181b;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  color: #991F36;
+  text-decoration: none;
+  border-bottom: 1px solid #991F36;
+max-width: 700px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+li:hover {
+  background-color: #F1F0EF;
+  color: #18181b;
+cursor: pointer;
+}
+h1 {
+  font-size: 48px;
+  text-align: center;
+  margin-top: 50px;
+}
 
 h2 {
   font-size: 24px;
   margin-top: 30px;
   margin-bottom: 10px;
+}
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 1.5rem;    /* Footer height */
 }
 
 #footer {
@@ -107,7 +145,36 @@ button {
 .misg:active {
   top: 2px;
 }
-
+.usaaw{
+  background: #F1F0EF;
+  border: none;
+  z-index: 1;
+}
+.usaaw:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background-color: #991F36;
+  border-radius: 5px;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  transition: all 0.3s ease;
+}
+.usaaw:hover {
+  color: #18181b;
+}
+.usaaw:hover:after {
+  left: 0;
+  width: 100%;
+}
+.usaaw:active {
+  top: 2px;
+}
 /* For screens smaller than 600px */
 @media (max-width: 600px) {
   body {
@@ -143,6 +210,14 @@ button {
     font-size: 16px;
   }
   
+  p, li, form {
+    max-width: 80%;
+  }
+  
+  h1 {
+    font-size: 40px;
+  }
+  
   h2 {
     font-size: 22px;
   }
@@ -162,6 +237,16 @@ button {
 @media (min-width: 900px) {
   body {
     font-size: 18px;
+  }
+  
+  p, li, form {
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+  
+  h1 {
+    font-size: 48px;
   }
   
   h2 {
