@@ -2,22 +2,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const fieldsets = document.querySelectorAll('fieldset');
     const generateButton = document.getElementById('generateButton');
 
-    // Add event listeners to all radio buttons in all fieldsets
+    // add event listeners to all radio buttons in all fieldsets
     fieldsets.forEach(function (fieldset) {
         const radios = fieldset.querySelectorAll('input[type="radio"]');
         radios.forEach(function (radio) {
             radio.addEventListener('change', function () {
                 if (this.checked) {
-                    // Hide the current fieldset
+                    // hide the current fieldset
                     fieldset.classList.add('hidden');
 
-                    // Show the next fieldset (if any)
+                    // show the next fieldset (if any)
                     const nextFieldset = getNextFieldset(fieldset);
                     if (nextFieldset) {
                         nextFieldset.classList.remove('hidden');
                     }
 
-                    // Show the generate button if it's the last fieldset
+                    // show the generate button if it's the last fieldset
                     if (!nextFieldset) {
                         generateButton.classList.remove('hidden');
                     }
@@ -26,20 +26,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Add event listener to generate button
+    // add event listener to generate button
     generateButton.addEventListener('click', function () {
         const selectedValues = getSelectedValues();
         let generatedMessage = 'Generated:';
 
         for (const fieldsetId in selectedValues) {
-            generatedMessage += ` ${selectedValues[fieldsetId]},`;
+            generatedMessage += ` ${formatValue(selectedValues[fieldsetId])},`;
         }
 
-        // Remove the trailing comma and display the message
+        // remove the trailing comma and display the message
         alert(generatedMessage.slice(0, -1));
     });
 
-    // Helper function to get the next visible fieldset
+    // function to get the next visible fieldset
     function getNextFieldset(currentFieldset) {
         for (let i = 0; i < fieldsets.length - 1; i++) {
             if (fieldsets[i] === currentFieldset) {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return null;
     }
 
-    // Helper function to get the selected values from all fieldsets
+    // function to get the selected values from all fieldsets
     function getSelectedValues() {
         const selectedValues = {};
         fieldsets.forEach(function (fieldset) {
@@ -59,5 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
         return selectedValues;
+    }
+
+    // function to format values (replace underscores with spaces)
+    function formatValue(value) {
+        return value.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2');
     }
 });
