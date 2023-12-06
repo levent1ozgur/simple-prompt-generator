@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple prompt generator</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+
+    <h1>simple prompt generator</h1>
+
+    <form id="optionsForm">
+        <label>
+          <h2>portrait</h2>
+            <input type="checkbox" name="option1"> Option 1
+        
+        <label>
+            <input type="checkbox" name="option2"> Option 2
+        </label>
+        <label>
+            <input type="checkbox" name="option3"> Option 3
+        </label>
+          <label>
+          <h2>landscape</h2>
+            <input type="checkbox" name="option1"> Option 1
+        
+        <label>
+            <input type="checkbox" name="option2"> Option 2
+        </label>
+        <label>
+            <input type="checkbox" name="option3"> Option 3
+        </label>
+
+        <button type="button" class="custom-btn misg" onclick="showSelectedOptions()">generate my prompt!</button>
+    </form>
+
+    <div id="selectedOptions"></div>
+
+   
+
+</body>
+</html>
