@@ -2,22 +2,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const fieldsets = document.querySelectorAll('fieldset');
     const generateButton = document.getElementById('generateButton');
 
-    // add event listeners to all radio buttons in all fieldsets
+    // Add event listeners to all radio buttons in all fieldsets
     fieldsets.forEach(function (fieldset) {
         const radios = fieldset.querySelectorAll('input[type="radio"]');
         radios.forEach(function (radio) {
             radio.addEventListener('change', function () {
                 if (this.checked) {
-                    // hide the current fieldset
+                    // Hide the current fieldset
                     fieldset.classList.add('hidden');
 
-                    // show the next fieldset (if any)
+                    // Show the next fieldset (if any)
                     const nextFieldset = getNextFieldset(fieldset);
                     if (nextFieldset) {
                         nextFieldset.classList.remove('hidden');
                     }
 
-                    // show the generate button if it's the last fieldset
+                    // Show the generate button if it's the last fieldset
                     if (!nextFieldset) {
                         generateButton.classList.remove('hidden');
                     }
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // add event listener to generate button
+    // Add event listener to generate button
     generateButton.addEventListener('click', function () {
         const selectedValues = getSelectedValues();
         let generatedMessage = 'Generated:';
@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
             generatedMessage += ` ${formatValue(selectedValues[fieldsetId])},`;
         }
 
-        // remove the trailing comma and display the message
+        // Remove the trailing comma and display the message
         alert(generatedMessage.slice(0, -1));
     });
 
-    // function to get the next visible fieldset
+    // Helper function to get the next visible fieldset
     function getNextFieldset(currentFieldset) {
         for (let i = 0; i < fieldsets.length - 1; i++) {
             if (fieldsets[i] === currentFieldset) {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return null;
     }
 
-    // function to get the selected values from all fieldsets
+    // Helper function to get the selected values from all fieldsets
     function getSelectedValues() {
         const selectedValues = {};
         fieldsets.forEach(function (fieldset) {
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return selectedValues;
     }
 
-    // function to format values (replace underscores with spaces)
+    // Helper function to format values (capitalize first letter of each word and insert spaces)
     function formatValue(value) {
-        return value.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2');
+        return value.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char) => char.toUpperCase());
     }
 });
