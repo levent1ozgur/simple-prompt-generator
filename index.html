@@ -13,134 +13,39 @@
 <meta property="og:description" content="Generate stunning images with AI using Okutagon's simple text-to-image prompt suggestions. Choose from a variety of categories, including portraits, landscapes, and 3D characters. Customize your prompts for specific details like age, expression, and more. Okutagon streamlines the creative process, making it easy for you to bring your ideas to life.">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="shortcut icon" type="image/png" href="styles/favicon.png">
-    <title>simple prompt generator</title>
+ <title>Simple Prompt Generator</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>simple prompt generator</h1>
+    <h1>Simple Prompt Generator</h1>
 
     <form id="optionsForm">
-<h1 class="highlight">Portrait Options</h1>
-<fieldset>
-<h2>Age Range</h2>
-<label><input type="checkbox" name="age" value="teenager"> Teenager</label>
-<label><input type="checkbox" name="age" value="young_adult"> Young adult</label>
-<label><input type="checkbox" name="age" value="middle_aged"> Middle-aged</label>
-<label><input type="checkbox" name="age" value="senior"> Senior</label>
-</fieldset>	    
-<fieldset>
-<h2>Facial Expressions</h2>
-<label><input type="checkbox" name="expressions" value="serious"> Serious</label>
-<label><input type="checkbox" name="expressions" value="happy"> Happy</label>
-<label><input type="checkbox" name="expressions" value="thoughtful"> Thoughtful</label>
-<label><input type="checkbox" name="expressions" value="surprised"> Surprised</label>
-<label><input type="checkbox" name="expressions" value="pensive"> Pensive</label>
-</fieldset>
-<fieldset>
-<h2>Ethnicity</h2>
-<label><input type="checkbox" name="ethnicity" value="caucasian"> Caucasian</label>
-<label><input type="checkbox" name="ethnicity" value="african"> African</label>
-<label><input type="checkbox" name="ethnicity" value="asian"> Asian</label>
-<label><input type="checkbox" name="ethnicity" value="hispanic"> Hispanic</label>
-<label><input type="checkbox" name="ethnicity" value="middle_eastern"> Middle Eastern</label>
-</fieldset>	
-<!-- Occupation -->
-<fieldset>
-    <h2>Occupation:</h2>
-    <label><input type="checkbox" name="occupation" value="BusinessProfessional"> Business Professional</label>
-    <label><input type="checkbox" name="occupation" value="Artist"> Artist</label>
-    <label><input type="checkbox" name="occupation" value="Doctor"> Doctor</label>
-    <label><input type="checkbox" name="occupation" value="Athlete"> Athlete</label>
-    <label><input type="checkbox" name="occupation" value="Musician"> Musician</label>
-</fieldset>
+        <h1 class="highlight">Portrait Options</h1>
+        
+        <fieldset id="ageFieldset">
+            <h2>Age Range</h2>
+            <label><input type="radio" name="age" value="teenager"> Teenager</label>
+            <label><input type="radio" name="age" value="young_adult"> Young adult</label>
+            <label><input type="radio" name="age" value="middle_aged"> Middle-aged</label>
+            <label><input type="radio" name="age" value="senior"> Senior</label>
+        </fieldset>
 
-<!-- Clothing Style -->
-<fieldset>
-    <h2>Clothing Style:</h2>
-    <label><input type="checkbox" name="clothingStyle" value="FormalAttire"> Formal Attire</label>
-    <label><input type="checkbox" name="clothingStyle" value="CasualWear"> Casual Wear</label>
-    <label><input type="checkbox" name="clothingStyle" value="VintageFashion"> Vintage Fashion</label>
-    <label><input type="checkbox" name="clothingStyle" value="SportsAttire"> Sports Attire</label>
-    <label><input type="checkbox" name="clothingStyle" value="CulturalAttire"> Cultural Attire</label>
-</fieldset>
+        <fieldset id="expressionsFieldset" class="hidden">
+            <h2>Facial Expressions</h2>
+            <label><input type="radio" name="expressions" value="serious"> Serious</label>
+            <label><input type="radio" name="expressions" value="happy"> Happy</label>
+            <label><input type="radio" name="expressions" value="thoughtful"> Thoughtful</label>
+            <label><input type="radio" name="expressions" value="surprised"> Surprised</label>
+            <label><input type="radio" name="expressions" value="pensive"> Pensive</label>
+        </fieldset>
 
-<!-- Accessories -->
-<fieldset>
-    <h2>Accessories:</h2>
-    <label><input type="checkbox" name="accessories" value="Glasses"> Glasses</label>
-    <label><input type="checkbox" name="accessories" value="Hat"> Hat</label>
-    <label><input type="checkbox" name="accessories" value="Scarf"> Scarf</label>
-    <label><input type="checkbox" name="accessories" value="Jewelry"> Jewelry</label>
-    <label><input type="checkbox" name="accessories" value="Tattoo"> Tattoo</label>
-</fieldset>
-
-<!-- Background Setting -->
-<fieldset>
-    <h2>Background Setting:</h2>
-    <label><input type="checkbox" name="backgroundSetting" value="UrbanBackdrop"> Urban Backdrop</label>
-    <label><input type="checkbox" name="backgroundSetting" value="NaturalScenery"> Natural Scenery</label>
-    <label><input type="checkbox" name="backgroundSetting" value="IndoorSetting"> Indoor Setting</label>
-    <label><input type="checkbox" name="backgroundSetting" value="StudioBackground"> Studio Background</label>
-    <label><input type="checkbox" name="backgroundSetting" value="AbstractBackground"> Abstract Background</label>
-</fieldset>
-
-<!-- Mood -->
-<fieldset>
-    <h2>Mood:</h2>
-    <label><input type="checkbox" name="mood" value="Romantic"> Romantic</label>
-    <label><input type="checkbox" name="mood" value="Mysterious"> Mysterious</label>
-    <label><input type="checkbox" name="mood" value="Confident"> Confident</label>
-    <label><input type="checkbox" name="mood" value="Playful"> Playful</label>
-    <label><input type="checkbox" name="mood" value="Dramatic"> Dramatic</label>
-</fieldset>
-
-<!-- Hair Style -->
-<fieldset>
-    <h2>Hair Style:</h2>
-    <label><input type="checkbox" name="hairStyle" value="ShortHair"> Short Hair</label>
-    <label><input type="checkbox" name="hairStyle" value="LongHair"> Long Hair</label>
-    <label><input type="checkbox" name="hairStyle" value="CurlyHair"> Curly Hair</label>
-    <label><input type="checkbox" name="hairStyle" value="StraightHair"> Straight Hair</label>
-    <label><input type="checkbox" name="hairStyle" value="Updo"> Updo</label>
-</fieldset>
-
-<!-- Pose -->
-<fieldset>
-    <h2>Pose:</h2>
-    <label><input type="checkbox" name="pose" value="Standing"> Standing</label>
-    <label><input type="checkbox" name="pose" value="Sitting"> Sitting</label>
-    <label><input type="checkbox" name="pose" value="Walking"> Walking</label>
-    <label><input type="checkbox" name="pose" value="Leaning"> Leaning</label>
-    <label><input type="checkbox" name="pose" value="ActionPose"> Action Pose</label>
-</fieldset>
-
-<!-- Time Period -->
-<fieldset>
-    <h2>Time Period:</h2>
-    <label><input type="checkbox" name="timePeriod" value="Contemporary"> Contemporary</label>
-    <label><input type="checkbox" name="timePeriod" value="Retro"> Retro</label>
-    <label><input type="checkbox" name="timePeriod" value="Vintage"> Vintage</label>
-    <label><input type="checkbox" name="timePeriod" value="Futuristic"> Futuristic</label>
-    <label><input type="checkbox" name="timePeriod" value="Timeless"> Timeless</label>
-</fieldset>
-
-<!-- Hobbies/Interests -->
-<fieldset>
-    <h2>Hobbies/Interests:</h2>
-    <label><input type="checkbox" name="hobbiesInterests" value="Reading"> Reading</label>
-    <label><input type="checkbox" name="hobbiesInterests" value="PlayingMusicalInstrument"> Playing a Musical Instrument</label>
-    <label><input type="checkbox" name="hobbiesInterests" value="Sports"> Sports</label>
-    <label><input type="checkbox" name="hobbiesInterests" value="ArtisticActivities"> Artistic Activities</label>
-    <label><input type="checkbox" name="hobbiesInterests" value="OutdoorActivities"> Outdoor Activities</label>
-</fieldset>
-
-        <button type="button" class="custom-btn misg" onclick="showSelectedOptions()">generate my prompt!</button>
+        <button type="button" id="generateButton" class="hidden">Generate!</button>
     </form>
-
-    <div id="selectedOptions"></div>
-
-   
-
 </body>
 
 </div>
