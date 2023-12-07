@@ -1,68 +1,45 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const fieldsets = document.querySelectorAll('fieldset');
-    const generateButton = document.getElementById('generateButton');
+document.addEventListener("DOMContentLoaded", function () {
+  const generatePortrait = document.querySelector('.custom-btn.copy');
 
-    // Add event listeners to all radio buttons in all fieldsets
-    fieldsets.forEach(function (fieldset) {
-        const radios = fieldset.querySelectorAll('input[type="radio"]');
-        radios.forEach(function (radio) {
-            radio.addEventListener('change', function () {
-                if (this.checked) {
-                    // Hide the current fieldset
-                    fieldset.classList.add('hidden');
+  generatePortrait.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent form submission
 
-                    // Show the next fieldset (if any)
-                    const nextFieldset = getNextFieldset(fieldset);
-                    if (nextFieldset) {
-                        nextFieldset.classList.remove('hidden');
-                    }
+    // Get all the selected checkboxes
+    const selectedCheckboxes = document.querySelectorAll('input[type="radio"]:checked');
 
-                    // Show the generate button if it's the last fieldset
-                    if (!nextFieldset) {
-                        generateButton.classList.remove('hidden');
-                    }
-                }
-            });
-        });
+    // If no checkboxes are selected, display a message and return
+    if (selectedCheckboxes.length === 0) {
+      alert('Please select at least one prompt.');
+      return;
+    }
+
+    // Create an array to store the values of the selected radios
+    const selectedValues = [];
+
+    // Loop through the selected checkboxes and push their values to the array
+    selectedCheckboxes.forEach(function (radio) {
+      selectedValues.push(radio.value);
     });
 
-    // Add event listener to generate button
-    generateButton.addEventListener('click', function () {
-        const selectedValues = getSelectedValues();
-        let generatedMessage = 'Generated:';
+    // Construct the string with the selected values separated by commas
+    const commandString = selectedValues.join(', ');
 
-        for (const fieldsetId in selectedValues) {
-            generatedMessage += ` ${formatValue(selectedValues[fieldsetId])},`;
-        }
+    // Create a temporary textarea to copy text to the clipboard
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = commandString;
+    document.body.appendChild(tempTextarea);
 
-        // Remove the trailing comma and display the message
-        alert(generatedMessage.slice(0, -1));
-    });
+    // Select the text in the textarea
+    tempTextarea.select();
+    tempTextarea.setSelectionRange(0, 99999); // For mobile devices
 
-    // Helper function to get the next visible fieldset
-    function getNextFieldset(currentFieldset) {
-        for (let i = 0; i < fieldsets.length - 1; i++) {
-            if (fieldsets[i] === currentFieldset) {
-                return fieldsets[i + 1];
-            }
-        }
-        return null;
-    }
+    // Copy the selected text to the clipboard
+    document.execCommand('copy');
 
-    // Helper function to get the selected values from all fieldsets
-    function getSelectedValues() {
-        const selectedValues = {};
-        fieldsets.forEach(function (fieldset) {
-            const checkedRadio = fieldset.querySelector('input[type="radio"]:checked');
-            if (checkedRadio) {
-                selectedValues[fieldset.id] = checkedRadio.value;
-            }
-        });
-        return selectedValues;
-    }
+    // Remove the temporary textarea
+    document.body.removeChild(tempTextarea);
 
-    // Helper function to format values (capitalize first letter of each word and insert spaces)
-    function formatValue(value) {
-        return value.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char) => char.toUpperCase());
-    }
+    // Show a success message
+    alert('The generated prompt has been copied to the clipboard.');
+  });
 });
