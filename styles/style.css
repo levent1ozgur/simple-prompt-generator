@@ -13,10 +13,16 @@ body {
 
 }
 
-h3 {
+h1 {
   font-size: 40px;
   text-align: center;
   margin-top: 50px;
+}
+h3 {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 50px;
+  font-style: italic;
 }
 form {
   max-width: 700px;
@@ -28,6 +34,7 @@ legend {
     background-color: #F1F0EF;
     color: #18181b;
 }
+
     
 input[type="checkbox"] {
   display: inline-block;
