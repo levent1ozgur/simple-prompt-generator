@@ -1,190 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Generate stunning images with AI using Okutagon's simple text-to-image prompt suggestions. Choose from a variety of categories, including portraits, landscapes, and 3D characters. Customize your prompts for specific details like age, expression, and more. Okutagon streamlines the creative process, making it easy for you to bring your ideas to life.">
-<meta name="keywords" content="Okutagon, text-to-image, AI, prompt suggestion, portrait, landscape, 3D characters, creative tools, image generation, customize prompts, streamline creativity, image creation, powerful AI, enhance your creativity">
-<meta name="robots" content="index, follow">
-<meta name="canonical" href="https://your-subdomain.okutagon.dev/">
-<meta property="og:title" content="Okutagon - Simple Prompt Generator">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://simple-prompt-generator.okutagon.dev/">
-<meta property="og:description" content="Generate stunning images with AI using Okutagon's simple text-to-image prompt suggestions. Choose from a variety of categories, including portraits, landscapes, and 3D characters. Customize your prompts for specific details like age, expression, and more. Okutagon streamlines the creative process, making it easy for you to bring your ideas to life.">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="shortcut icon" type="image/png" href="styles/favicon.png">
-   
-    <title>Simple Prompt Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            cursor: pointer;
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 0 10px;
-            background-color: #eee;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .tab:hover {
-            background-color: #f0f0f0;
-        }
-
-        #prompt-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .prompt {
-            cursor: pointer;
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .prompt:hover {
-            background-color: #f0f0f0;
-        }
-
-        #generate-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-        }
-
-        #result {
-            margin-top: 20px;
-        }
-    </style>
-    <script>
-        const segments = [
-            {
-                title: 'Breakfast',
-                groups: [
-                    ['Egg', 'Bread', 'Cheese', 'Tomato'],
-                    ['Milk', 'Cereal', 'Banana']
-                ]
-            },
-            {
-                title: 'Lunch',
-                groups: [
-                    ['Chicken', 'Rice', 'Broccoli', 'Carrot'],
-                    ['Pasta', 'Tomato Sauce', 'Spinach']
-                ]
-            },
-            {
-                title: 'Snacks',
-                groups: [
-                    ['Apple', 'Peanut Butter', 'Yogurt'],
-                    ['Popcorn', 'Nuts', 'Cheese']
-                ]
-            },
-            {
-                title: 'Dinner',
-                groups: [
-                    ['Salmon', 'Quinoa', 'Asparagus', 'Lemon'],
-                    ['Beef', 'Potato', 'Green Beans']
-                ]
-            },
-            {
-                title: 'Fruit Salad',
-                groups: [
-                    ['Strawberry', 'Blueberry', 'Kiwi', 'Mango'],
-                    ['Pineapple', 'Orange', 'Grapes']
-                ]
-            }
-        ];
-
-        let selectedIngredients = [];
-        let currentSegmentIndex = 0;
-        let currentGroupIndex = 0;
-
-        function selectIngredient(prompt) {
-            selectedIngredients.push(prompt);
-            currentGroupIndex++;
-            updateIngredientList();
-        }
-
-        function changeTab(index) {
-            currentSegmentIndex = index;
-            currentGroupIndex = 0;
-            selectedIngredients = [];
-            updateIngredientList();
-        }
-
-        function updateIngredientList() {
-            const tabsContainer = document.getElementById('tabs-container');
-            tabsContainer.innerHTML = '';
-
-            const ingredientContainer = document.getElementById('prompt-container');
-            ingredientContainer.innerHTML = '';
-
-            segments.forEach((segment, index) => {
-                const tabDiv = document.createElement('div');
-                tabDiv.classList.add('tab');
-                tabDiv.textContent = segment.title;
-                tabDiv.addEventListener('click', () => changeTab(index));
-                tabsContainer.appendChild(tabDiv);
-
-                if (index === currentSegmentIndex) {
-                    const currentGroup = segment.groups[currentGroupIndex];
-
-                    currentGroup.forEach(prompt => {
-                        if (!selectedIngredients.includes(prompt)) {
-                            const ingredientDiv = document.createElement('div');
-                            ingredientDiv.classList.add('prompt');
-                            ingredientDiv.textContent = prompt;
-                            ingredientDiv.addEventListener('click', () => selectIngredient(prompt));
-                            ingredientContainer.appendChild(ingredientDiv);
-                        }
-                    });
-                }
-            });
-        }
-
-        function generateRecipe() {
-            const resultContainer = document.getElementById('result');
-            resultContainer.textContent = `Chosen items: ${selectedIngredients.join(', ')}`;
-        }
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate stunning images with AI using Okutagon's simple text-to-image prompt suggestions. Choose from a variety of categories, including portraits, landscapes, and 3D characters. Customize your prompts for specific details like age, expression, and more. Okutagon streamlines the creative process, making it easy for you to bring your ideas to life.">
+  <meta name="keywords" content="Okutagon, text-to-image, AI, prompt suggestion, portrait, landscape, 3D characters, creative tools, image generation, customize prompts, streamline creativity, image creation, powerful AI, enhance your creativity">
+  <meta name="robots" content="index, follow">
+  <meta name="canonical" href="https://your-subdomain.okutagon.dev/">
+  <meta property="og:title" content="Okutagon - Simple Prompt Generator">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://simple-prompt-generator.okutagon.dev/">
+  <meta property="og:description" content="Generate stunning images with AI using Okutagon's simple text-to-image prompt suggestions. Choose from a variety of categories, including portraits, landscapes, and 3D characters. Customize your prompts for specific details like age, expression, and more. Okutagon streamlines the creative process, making it easy for you to bring your ideas to life.">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="shortcut icon" type="image/png" href="styles/favicon.png">   
+  <title>Simple Prompt Generator</title>
 </head>
 <body>
-    <h1>Random Recipe Generator</h1>
-    <div id="tabs-container" class="tabs"></div>
-    <div id="prompt-container"></div>
-    <button id="generate-btn" onclick="generateRecipe()">Generate!</button>
-    <div id="result"></div>
+  <div class="portrait-generator">
+    
+    <form id="portraitForm">
 
-    <script>
-        updateIngredientList();
-    </script>
-</body>
-</html>
+<h3>Select attributes for a desired prompts</h3>
+  <fieldset>
+    <legend>Age Range:</legend>
+    <label><input type="radio" name="age" value="teenager">Teenager</label>
+    <label><input type="radio" name="age" value="young adult">Young adult</label>
+    <label><input type="radio" name="age" value="middle aged">Middle-aged</label>
+    <label><input type="radio" name="age" value="elderly">Elderly</label>
+  </fieldset>
 
+  <fieldset>
+    <legend>Facial Expressions:</legend>
+    <label><input type="radio" name="expression" value="serious">Serious</label>
+    <label><input type="radio" name="expression" value="happy">Happy</label>
+    <label><input type="radio" name="expression" value="thoughtful">Thoughtful</label>
+    <label><input type="radio" name="expression" value="surprised">Surprised</label>
+    <label><input type="radio" name="expression" value="pensive">Pensive</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Ethnicity:</legend>
+    <label><input type="radio" name="ethnicity" value="caucasian">Caucasian</label>
+    <label><input type="radio" name="ethnicity" value="african">African</label>
+    <label><input type="radio" name="ethnicity" value="asian">Asian</label>
+    <label><input type="radio" name="ethnicity" value="hispanic">Hispanic</label>
+    <label><input type="radio" name="ethnicity" value="middle eastern">Middle Eastern</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Occupation:</legend>
+    <label><input type="radio" name="occupation" value="business professional">Business professional</label>
+    <label><input type="radio" name="occupation" value="artist">Artist</label>
+    <label><input type="radio" name="occupation" value="doctor">Doctor</label>
+    <label><input type="radio" name="occupation" value="athlete">Athlete</label>
+    <label><input type="radio" name="occupation" value="musician">Musician</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Clothing Style:</legend>
+    <label><input type="radio" name="clothing" value="formal attire">Formal attire</label>
+    <label><input type="radio" name="clothing" value="casual wear">Casual wear</label>
+    <label><input type="radio" name="clothing" value="vintage fashion">Vintage fashion</label>
+    <label><input type="radio" name="clothing" value="sports attire">Sports attire</label>
+    <label><input type="radio" name="clothing" value="cultural attire">Cultural attire</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Accessories:</legend>
+    <label><input type="radio" name="accessories" value="glasses">Glasses</label>
+    <label><input type="radio" name="accessories" value="hat">Hat</label>
+    <label><input type="radio" name="accessories" value="scarf">Scarf</label>
+    <label><input type="radio" name="accessories" value="jewelry">Jewelry</label>
+    <label><input type="radio" name="accessories" value="tattoo">Tattoo</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Background Setting:</legend>
+    <label><input type="radio" name="background" value="urban backdrop">Urban backdrop</label>
+    <label><input type="radio" name="background" value="natural scenery">Natural scenery</label>
+    <label><input type="radio" name="background" value="indoor setting">Indoor setting</label>
+    <label><input type="radio" name="background" value="studio background">Studio background</label>
+    <label><input type="radio" name="background" value="abstract background">Abstract background</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Mood:</legend>
+    <label><input type="radio" name="mood" value="romantic">Romantic</label>
+    <label><input type="radio" name="mood" value="mysterious">Mysterious</label>
+    <label><input type="radio" name="mood" value="confident">Confident</label>
+    <label><input type="radio" name="mood" value="playful">Playful</label>
+    <label><input type="radio" name="mood" value="dramatic">Dramatic</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Hair Style:</legend>
+    <label><input type="radio" name="hair" value="short hair">Short hair</label>
+    <label><input type="radio" name="hair" value="long hair">Long hair</label>
+    <label><input type="radio" name="hair" value="curly hair">Curly hair</label>
+    <label><input type="radio" name="hair" value="straight hair">Straight hair</label>
+    <label><input type="radio" name="hair" value="updo">Updo</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Pose:</legend>
+    <label><input type="radio" name="pose" value="standing">Standing</label>
+    <label><input type="radio" name="pose" value="sitting">Sitting</label>
+    <label><input type="radio" name="pose" value="walking">Walking</label>
+    <label><input type="radio" name="pose" value="leaning">Leaning</label>
+    <label><input type="radio" name="pose" value="action pose">Action pose</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Time Period:</legend>
+    <label><input type="radio" name="timePeriod" value="contemporary">Contemporary</label>
+    <label><input type="radio" name="timePeriod" value="retro">Retro</label>
+    <label><input type="radio" name="timePeriod" value="vintage">Vintage</label>
+    <label><input type="radio" name="timePeriod" value="futuristic">Futuristic</label>
+    <label><input type="radio" name="timePeriod" value="timeless">Timeless</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Hobbies/Interests:</legend>
+    <label><input type="radio" name="hobbies" value="reading">Reading</label>
+    <label><input type="radio" name="hobbies" value="playing instrument">Playing a musical instrument</label>
+    <label><input type="radio" name="hobbies" value="sports">Sports</label>
+    <label><input type="radio" name="hobbies" value="artistic activities">Artistic activities</label>
+    <label><input type="radio" name="hobbies" value="outdoor activities">Outdoor activities</label>
+  </fieldset>
+
+</form>
+</div>
+
+   </div>
+  <div class="frame">
+  <button class="custom-btn misg" onclick="copyToClipboard()">generate and copy my prompt!</button>
+  <p id="promptResult"></p>
+</div>
+</body> 
+
+<footer id="footer">
+  <p>&copy; 2023 &nabla; <a href="https://okutagon.dev/">okutagon</a>. all rights reserved. <a href="https://okutagon.dev/donation/">donations</a> are welcome.</p>
+</footer>
+
+<!-- javascript -->
+<script type="text/javascript" src="/script/script.js" async></script>
 </body>
 </html>
