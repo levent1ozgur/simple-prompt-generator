@@ -16,134 +16,175 @@
    
     <title>Simple Prompt Generator</title>
     <style>
-        .hidden {
-            display: none;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .tab:hover {
+            background-color: #f0f0f0;
+        }
+
+        #prompt-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .prompt {
+            cursor: pointer;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .prompt:hover {
+            background-color: #f0f0f0;
+        }
+
+        #generate-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
         }
     </style>
+    <script>
+        const segments = [
+            {
+                title: 'Breakfast',
+                groups: [
+                    ['Egg', 'Bread', 'Cheese', 'Tomato'],
+                    ['Milk', 'Cereal', 'Banana']
+                ]
+            },
+            {
+                title: 'Lunch',
+                groups: [
+                    ['Chicken', 'Rice', 'Broccoli', 'Carrot'],
+                    ['Pasta', 'Tomato Sauce', 'Spinach']
+                ]
+            },
+            {
+                title: 'Snacks',
+                groups: [
+                    ['Apple', 'Peanut Butter', 'Yogurt'],
+                    ['Popcorn', 'Nuts', 'Cheese']
+                ]
+            },
+            {
+                title: 'Dinner',
+                groups: [
+                    ['Salmon', 'Quinoa', 'Asparagus', 'Lemon'],
+                    ['Beef', 'Potato', 'Green Beans']
+                ]
+            },
+            {
+                title: 'Fruit Salad',
+                groups: [
+                    ['Strawberry', 'Blueberry', 'Kiwi', 'Mango'],
+                    ['Pineapple', 'Orange', 'Grapes']
+                ]
+            }
+        ];
+
+        let selectedIngredients = [];
+        let currentSegmentIndex = 0;
+        let currentGroupIndex = 0;
+
+        function selectIngredient(prompt) {
+            selectedIngredients.push(prompt);
+            currentGroupIndex++;
+            updateIngredientList();
+        }
+
+        function changeTab(index) {
+            currentSegmentIndex = index;
+            currentGroupIndex = 0;
+            selectedIngredients = [];
+            updateIngredientList();
+        }
+
+        function updateIngredientList() {
+            const tabsContainer = document.getElementById('tabs-container');
+            tabsContainer.innerHTML = '';
+
+            const ingredientContainer = document.getElementById('prompt-container');
+            ingredientContainer.innerHTML = '';
+
+            segments.forEach((segment, index) => {
+                const tabDiv = document.createElement('div');
+                tabDiv.classList.add('tab');
+                tabDiv.textContent = segment.title;
+                tabDiv.addEventListener('click', () => changeTab(index));
+                tabsContainer.appendChild(tabDiv);
+
+                if (index === currentSegmentIndex) {
+                    const currentGroup = segment.groups[currentGroupIndex];
+
+                    currentGroup.forEach(prompt => {
+                        if (!selectedIngredients.includes(prompt)) {
+                            const ingredientDiv = document.createElement('div');
+                            ingredientDiv.classList.add('prompt');
+                            ingredientDiv.textContent = prompt;
+                            ingredientDiv.addEventListener('click', () => selectIngredient(prompt));
+                            ingredientContainer.appendChild(ingredientDiv);
+                        }
+                    });
+                }
+            });
+        }
+
+        function generateRecipe() {
+            const resultContainer = document.getElementById('result');
+            resultContainer.textContent = `Chosen items: ${selectedIngredients.join(', ')}`;
+        }
+    </script>
 </head>
 <body>
+    <h1>Random Recipe Generator</h1>
+    <div id="tabs-container" class="tabs"></div>
+    <div id="prompt-container"></div>
+    <button id="generate-btn" onclick="generateRecipe()">Generate!</button>
+    <div id="result"></div>
 
-      <h1>simple prompt generator</h1>
-
-    <form id="optionsForm">
-<h1 class="highlight">Portrait Options</h1>
-<fieldset>
-<h2>Age Range</h2>
-<label><input type="radio" name="age" value="teenager"> Teenager</label>
-<label><input type="radio" name="age" value="young_adult"> Young adult</label>
-<label><input type="radio" name="age" value="middle_aged"> Middle-aged</label>
-<label><input type="radio" name="age" value="senior"> Senior</label>
-</fieldset>	    
-<fieldset id="facialexpressionsFieldset" class="hidden">
-<h2>Facial Expressions</h2>
-<label><input type="radio" name="expressions" value="serious"> Serious</label>
-<label><input type="radio" name="expressions" value="happy"> Happy</label>
-<label><input type="radio" name="expressions" value="thoughtful"> Thoughtful</label>
-<label><input type="radio" name="expressions" value="surprised"> Surprised</label>
-<label><input type="radio" name="expressions" value="pensive"> Pensive</label>
-</fieldset>
-<fieldset id="ethnicityFieldset" class="hidden">
-<h2>Ethnicity</h2>
-<label><input type="radio" name="ethnicity" value="caucasian"> Caucasian</label>
-<label><input type="radio" name="ethnicity" value="african"> African</label>
-<label><input type="radio" name="ethnicity" value="asian"> Asian</label>
-<label><input type="radio" name="ethnicity" value="hispanic"> Hispanic</label>
-<label><input type="radio" name="ethnicity" value="middle_eastern"> Middle Eastern</label>
-</fieldset>	
-<!-- Occupation -->
-<fieldset id="occupationFieldset" class="hidden">
-    <h2>Occupation:</h2>
-    <label><input type="radio" name="occupation" value="BusinessProfessional"> Business Professional</label>
-    <label><input type="radio" name="occupation" value="Artist"> Artist</label>
-    <label><input type="radio" name="occupation" value="Doctor"> Doctor</label>
-    <label><input type="radio" name="occupation" value="Athlete"> Athlete</label>
-    <label><input type="radio" name="occupation" value="Musician"> Musician</label>
-</fieldset>
-
-<!-- Clothing Style -->
-<fieldset id="clothingstyleFieldset" class="hidden">
-    <h2>Clothing Style:</h2>
-    <label><input type="radio" name="clothingStyle" value="FormalAttire"> Formal Attire</label>
-    <label><input type="radio" name="clothingStyle" value="CasualWear"> Casual Wear</label>
-    <label><input type="radio" name="clothingStyle" value="VintageFashion"> Vintage Fashion</label>
-    <label><input type="radio" name="clothingStyle" value="SportsAttire"> Sports Attire</label>
-    <label><input type="radio" name="clothingStyle" value="CulturalAttire"> Cultural Attire</label>
-</fieldset>
-
-<!-- Accessories -->
-<fieldset id="accessoriesFieldset" class="hidden">
-    <h2>Accessories:</h2>
-    <label><input type="radio" name="accessories" value="Glasses"> Glasses</label>
-    <label><input type="radio" name="accessories" value="Hat"> Hat</label>
-    <label><input type="radio" name="accessories" value="Scarf"> Scarf</label>
-    <label><input type="radio" name="accessories" value="Jewelry"> Jewelry</label>
-    <label><input type="radio" name="accessories" value="Tattoo"> Tattoo</label>
-</fieldset>
-
-<!-- Background Setting -->
-<fieldset id="backgroundFieldset" class="hidden">
-    <h2>Background Setting:</h2>
-    <label><input type="radio" name="backgroundSetting" value="UrbanBackdrop"> Urban Backdrop</label>
-    <label><input type="radio" name="backgroundSetting" value="NaturalScenery"> Natural Scenery</label>
-    <label><input type="radio" name="backgroundSetting" value="IndoorSetting"> Indoor Setting</label>
-    <label><input type="radio" name="backgroundSetting" value="StudioBackground"> Studio Background</label>
-    <label><input type="radio" name="backgroundSetting" value="AbstractBackground"> Abstract Background</label>
-</fieldset>
-
-<!-- Mood -->
-<fieldset id="moodFieldset" class="hidden">
-    <h2>Mood:</h2>
-    <label><input type="radio" name="mood" value="Romantic"> Romantic</label>
-    <label><input type="radio" name="mood" value="Mysterious"> Mysterious</label>
-    <label><input type="radio" name="mood" value="Confident"> Confident</label>
-    <label><input type="radio" name="mood" value="Playful"> Playful</label>
-    <label><input type="radio" name="mood" value="Dramatic"> Dramatic</label>
-</fieldset>
-
-<!-- Hair Style -->
-<fieldset id="hairstyleFieldset" class="hidden">
-    <h2>Hair Style:</h2>
-    <label><input type="radio" name="hairStyle" value="ShortHair"> Short Hair</label>
-    <label><input type="radio" name="hairStyle" value="LongHair"> Long Hair</label>
-    <label><input type="radio" name="hairStyle" value="CurlyHair"> Curly Hair</label>
-    <label><input type="radio" name="hairStyle" value="StraightHair"> Straight Hair</label>
-    <label><input type="radio" name="hairStyle" value="Updo"> Updo</label>
-</fieldset>
-
-<!-- Pose -->
-<fieldset id="poseFieldset" class="hidden">
-    <h2>Pose:</h2>
-    <label><input type="radio" name="pose" value="Standing"> Standing</label>
-    <label><input type="radio" name="pose" value="Sitting"> Sitting</label>
-    <label><input type="radio" name="pose" value="Walking"> Walking</label>
-    <label><input type="radio" name="pose" value="Leaning"> Leaning</label>
-    <label><input type="radio" name="pose" value="ActionPose"> Action Pose</label>
-</fieldset>
-
-<!-- Time Period -->
-<fieldset id="timeperiodFieldset" class="hidden">
-    <h2>Time Period:</h2>
-    <label><input type="radio" name="timePeriod" value="Contemporary"> Contemporary</label>
-    <label><input type="radio" name="timePeriod" value="Retro"> Retro</label>
-    <label><input type="radio" name="timePeriod" value="Vintage"> Vintage</label>
-    <label><input type="radio" name="timePeriod" value="Futuristic"> Futuristic</label>
-    <label><input type="radio" name="timePeriod" value="Timeless"> Timeless</label>
-</fieldset>
-
-<!-- Hobbies/Interests -->
-<fieldset id="hobbiesInterestsFieldset" class="hidden">
-    <h2>Hobbies/Interests:</h2>
-    <label><input type="radio" name="hobbiesInterests" value="Reading"> Reading</label>
-    <label><input type="radio" name="hobbiesInterests" value="PlayingMusicalInstrument"> Playing a Musical Instrument</label>
-    <label><input type="radio" name="hobbiesInterests" value="Sports"> Sports</label>
-    <label><input type="radio" name="hobbiesInterests" value="ArtisticActivities"> Artistic Activities</label>
-    <label><input type="radio" name="hobbiesInterests" value="OutdoorActivities"> Outdoor Activities</label>
-</fieldset>
-        <button type="button" id="generateButton" class="hidden">Generate my simple prompt!</button>
-    </form>
+    <script>
+        updateIngredientList();
+    </script>
 </body>
-
-</div>
+</html>
 
 </body>
 </html>
